@@ -10,10 +10,10 @@ var appGlobals = {
   isProd: isProd,
   server: {
     host: '0.0.0.0',
-    port: (isProd) ? process.env.PORT : 8000,
+    port: (process.env.PORT) ? process.env.PORT : 3000,
     routes: {
       files: {
-        relativeTo: process.cwd() + '/resources'
+        relativeTo: process.cwd() + '/public'
       }
     }
   },
