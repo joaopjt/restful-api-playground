@@ -6,14 +6,14 @@ module.exports = function(app) {
     handler: function(req, res) {
       res('').type('image/x-icon').code(200);
     }
-  })
+  });
 
   app.route({
     method: 'GET',
-    path: '/assets/{param*}',
+    path: '/',
     handler: {
       directory: {
-        path: 'assets'
+        path: './public/'
       }
     }
   });
