@@ -7,7 +7,7 @@ module.exports = {
     connection: {
       host: 'localhost',
       user: 'user',
-      pass: 'pass',
+      password: 'pass',
       database: 'database'
     },
     migrations: {
