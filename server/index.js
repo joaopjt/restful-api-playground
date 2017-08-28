@@ -14,18 +14,14 @@ module.exports = {
     serverListeners(Server);
 
     // Start the server
-    Server.start(function(err) {  
-      cb(err, Server);
-    });
+    Server.start();
   }
 }
 
 function serverListeners(Server) {
   Server.on('start', function(err) {
-    // Load server resources
-    Core.load(Server);
+    Core.load(Server); // Load server resources
 
-    // Return a server info for logs
     console.log('Server running at PORT', Server.info.port);
   });
 

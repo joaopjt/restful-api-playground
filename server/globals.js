@@ -1,16 +1,30 @@
 const knex = require('knex');
-const isProd = (process.env.NODE_ENV == 'prod') ? true : false;
-var knexConfig = require('../knexfile');
+const env = require('./core/helpers/env');
 
-knexConfig = (isProd) ? knexConfig.production : knexConfig.development;
+/**
+ * Knex query builder config
+ * @type {Object}
+ */
+let knexConfig = {
+  client: env('DB_CLIENT'),
+  connection: {
+    host: env('DB_HOST'),
+    user: env('DB_USER'),
+    password: env('DB_PASS'),
+    database: env('DB_NAME')
+  },
+  migrations: {
+    directory: './server/migrations/'
+  },
+  seeds: {
+    directory: './server/seeds/'
+  }
+}
 
-var DB = knex(knexConfig);
-
-var appGlobals = {
-  isProd: isProd,
+let appGlobals = {
   server: {
-    host: '0.0.0.0',
-    port: (process.env.PORT) ? process.env.PORT : 3000,
+    host: env('SERVER_HOST'),
+    port: env('SERVER_PORT'),
     routes: {
       files: {
         relativeTo: process.cwd() + '/public'
@@ -18,10 +32,11 @@ var appGlobals = {
     }
   },
   https: {
-    enable: isProd,
+    enable: false,
     options: {}
   }
 }
 
+global.env = env;
 global.App = appGlobals;
-global.DB = DB;
+global.DB = knex(knexConfig);

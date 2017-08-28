@@ -3,10 +3,13 @@ const path = require('path');
 
 module.exports = {
   load(Server) {
-    // Load server resources
+    /**
+     * Load scripts in folders async
+     * @type {Promise}
+     */
     consign({ 
         cwd: path.resolve(__dirname, '../'),
-        verbose: !App.isProd 
+        verbose: false
       })
       .include('plugins')
       .then('middlewares')

@@ -10,12 +10,14 @@ module.exports = function(app) {
 
   app.route({
     method: 'GET',
-    path: '/',
+    path: '/{path}',
     handler: {
       directory: {
-        path: './public/'
+        path: './public/',
+        redirectToSlash: true,
+        index: true
       }
     }
   });
-
+  
 }

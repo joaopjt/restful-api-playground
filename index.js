@@ -1,4 +1,4 @@
-// Define our global vars
+require('dotenv').config();
 require('./server/globals');
 
 const Server = require('./server/index');

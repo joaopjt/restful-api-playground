@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const Boom = require('boom');
 
 module.exports = function (Server) {
-  let unauthorized = Bomm.unauthorized('Token invalid or expired!');
+  let unauthorized = Boom.unauthorized('Token invalid or expired!');
 
   const auth = function () {
     return {
@@ -13,7 +13,7 @@ module.exports = function (Server) {
         if (!token) {
           return res(unauthorized).code(401);
         } else {
-          let decoded = jwt.verify(token, App.JSON_PASS);
+          let decoded = jwt.verify(token, env('JWT_HASH'));
           
           if(!decoded) return res(unauthorized).code(401);
 
